@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AuthentificationController extends AbstractController
 {
-    #[Route('/bienvenue', name: 'app_bienvenue')]
+    #[Route('/', name: 'app_bienvenue')]
     public function welcome(): Response
     {
         return $this->render('auth/bienvenue.html.twig', [

@@ -15,6 +15,7 @@
                      <tr>
                         <th>Prénom, Nom</th>
                         <th>Statut</th>
+                        <th>Role</th>
                         <th>Actions</th>
                      </tr>
                   </thead>
@@ -24,7 +25,7 @@
                         <td>
                            <div class="employee-infos">
                               <div class="employee-avatar">
-                                 ND
+                                 {{ user.initials }}
                               </div>
                               <div class="employee-coords">
                                  <strong>{{ user.firstName }} {{ user.lastName }}</strong>
@@ -33,6 +34,7 @@
                            </div>
                         </td>
                         <td>{{ user.contractType }}</td>
+                        <td>{{ user.accessLevel }}</td>
                         <td>
                            <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
                            Éditer
