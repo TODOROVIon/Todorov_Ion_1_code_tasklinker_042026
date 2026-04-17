@@ -8,4 +8,8 @@ security:
             # Demander Patxi pour explications
             # cost: 15 # for bcrypt (default is 13)
             # time_cost: 4 # for argon2i (default is 2)
-            # memory_cost: 1024 # for argon2i (default is 1024)       
+            # memory_cost: 1024 # for argon2i (default is 1024)
+    
+    firewalls:
+        main:
+            pattern: ^/admin
