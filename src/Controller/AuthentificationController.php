@@ -39,11 +39,16 @@ final class AuthentificationController extends AbstractController
                 $form->get('password')->getData()
             );
             $user->setPassword($hashedPassword);
+            $user->setAccessLevel('Developpeur');
+            $user->setContractType('CDI');
+            $user->setEnterDate(new \DateTime());
+            $user->setIsActive(true);
+
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_bienvenue');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('auth/register.html.twig', [
