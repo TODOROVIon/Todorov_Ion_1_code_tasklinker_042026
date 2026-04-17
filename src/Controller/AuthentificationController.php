@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Users;
+use App\Form\RegisterType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+
+final class AuthentificationController extends AbstractController
+{
+    #[Route('/bienvenue', name: 'app_bienvenue')]
+    public function welcome(): Response
+    {
+        return $this->render('auth/bienvenue.html.twig', [
+        ]);
+    }
+
+    #[Route('/inscription', name: 'app_inscription')]
+    public function inscription(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $user = new Users();
+        $form = $this->createForm(RegisterType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setFirstName($form->get('firstName')->getData());
+            $user->setLastName($form->get('lastName')->getData());
+            $user->setEmail($form->get('email')->getData());
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $form->get('password')->getData()
+            );
+            $user->setPassword($hashedPassword);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_bienvenue');
+        }
+
+        return $this->render('auth/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+}
