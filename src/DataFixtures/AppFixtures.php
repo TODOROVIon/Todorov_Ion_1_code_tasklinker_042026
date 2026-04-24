@@ -9,9 +9,14 @@ use App\Entity\Tag;
 use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private UserPasswordHasherInterface $hasher
+    ) {}
+
     public function load(ObjectManager $manager): void
     {
         $tagSymfony = new Tag();
@@ -66,8 +71,8 @@ class AppFixtures extends Fixture
         $user1->setFirstName('John');
         $user1->setLastName('Doe');
         $user1->setEmail('john.doe@example.fr');
-        $user1->setPassword('john.doe');
-        $user1->setAccessLevel('Manager');
+        $user1->setPassword($this->hasher->hashPassword($user1, 'john.doe'));
+        $user1->setAccessLevel('Chef de projet');
         $user1->setContractType('CDI');
         $user1->setEnterDate(new \DateTime('2025-01-01'));
         $user1->setIsActive(true);
@@ -78,8 +83,8 @@ class AppFixtures extends Fixture
         $user2->setFirstName('Alice');
         $user2->setLastName('Doe');
         $user2->setEmail('alice.doe@example.fr');
-        $user2->setPassword('alice.doe');
-        $user2->setAccessLevel('Developer');
+        $user2->setPassword($this->hasher->hashPassword($user2, 'alice.doe'));
+        $user2->setAccessLevel('Admin');
         $user2->setContractType('CDD');
         $user2->setEnterDate(new \DateTime('2025-02-01'));
         $user2->setIsActive(true);
@@ -90,8 +95,8 @@ class AppFixtures extends Fixture
         $user3->setFirstName('Fabrice');
         $user3->setLastName('Martin');
         $user3->setEmail('fabrice.martin@example.fr');
-        $user3->setPassword('fabrice.martin');
-        $user3->setAccessLevel('Developer');
+        $user3->setPassword($this->hasher->hashPassword($user3, 'fabrice.martin'));
+        $user3->setAccessLevel('Développeur');
         $user3->setContractType('Freelance');
         $user3->setEnterDate(new \DateTime('2025-03-01'));
         $user3->setIsActive(true);

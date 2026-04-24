@@ -36,12 +36,14 @@
                         <td>{{ user.contractType }}</td>
                         <td>{{ user.accessLevel }}</td>
                         <td>
+                        {% if is_granted('ROLE_CHEF_PROJET') %}
                            <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
                            Éditer
                            </a>
                            <a class="delete-team" href="{{ path('app_users_delete', {'id': user.id}) }}">
                            Supprimer
                            </a>
+                        {% endif %}
                         </td>
                      </tr>
                      {% endfor %}              

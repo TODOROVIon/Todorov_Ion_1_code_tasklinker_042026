@@ -68,4 +68,9 @@ final class AuthentificationController extends AbstractController
             'error' => $error
         ]);
     }
+
+    #[Route('/deconnexion', name: 'app_deconnexion')]
+    public function deconnexion(): void
+    {     // Cette méthode peut être laissée vide, Symfony gère la déconnexion automatiquement
+    }
 }
