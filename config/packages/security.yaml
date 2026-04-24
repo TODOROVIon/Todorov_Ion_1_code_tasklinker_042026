@@ -32,7 +32,7 @@ security:
 
 
     access_control: 
-        - { path: ^/, roles: PUBLIC_ACCESS }
+        - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/connexion, roles: PUBLIC_ACCESS }
         - { path: ^/inscription, roles: PUBLIC_ACCESS }
         - { path: ^/projet, roles: ROLE_DEVELOPPEUR }
