@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,6 +25,13 @@ class UserType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
+            ->add('access_level', ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'Admin',
+                    'Chef de projet' => 'Chef de projet',
+                    'Développeur' => 'Développeur',
+                ]
+        ])
         ;
     }
 

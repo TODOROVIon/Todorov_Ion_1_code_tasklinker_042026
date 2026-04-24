@@ -35,15 +35,12 @@ security:
         - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/connexion, roles: PUBLIC_ACCESS }
         - { path: ^/inscription, roles: PUBLIC_ACCESS }
-        - { path: ^/projet, roles: ROLE_DEVELOPPEUR }
-        - { path: ^/projet/show, roles: ROLE_DEVELOPPEUR }
         - { path: ^/projet/add, roles: ROLE_CHEF_PROJET }
         - { path: ^/projet/edit, roles: ROLE_CHEF_PROJET }
         - { path: ^/projet/delete, roles: ROLE_CHEF_PROJET }
-        - { path: ^/tache, roles: ROLE_DEVELOPPEUR }
         - { path: ^/tache/add, roles: ROLE_CHEF_PROJET }
         - { path: ^/tache/delete, roles: ROLE_CHEF_PROJET }
         - { path: ^/list, roles: ROLE_DEVELOPPEUR }
         - { path: ^/show, roles: ROLE_CHEF_PROJET }
         - { path: ^/users/delete, roles: ROLE_CHEF_PROJET }
-    
+        - { path: ^/, roles: ROLE_DEVELOPPEUR }

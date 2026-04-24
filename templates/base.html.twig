@@ -43,13 +43,16 @@
                      </a>
                   </li>
                </ul>
-               {% if app.user %}
-                  <a href="{{ path('app_deconnexion') }}" class="user-avatar" title="Se déconnecter">
+            {% if app.user %}
+               <a href="{{ path('app_deconnexion') }}" class="avatar-deconnection" title="Se déconnecter">
+                  <div class="mini-user">
                      {{ app.user.initials }}
-                  </a>
-               {% endif %}
+                  </div>
+               </a>
+            {% endif %}
             {% endblock %}
             </nav>
+
             <main>
             {% block main %}
                
