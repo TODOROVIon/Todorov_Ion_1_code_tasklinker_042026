@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class AuthentificationController extends AbstractController
 {
@@ -56,4 +57,15 @@ final class AuthentificationController extends AbstractController
         ]);
     }
 
+    #[Route('/connexion', name: 'app_connexion')]
+    public function connexion(AuthenticationUtils $authenticationUtils): Response
+    {
+        $email = $authenticationUtils->getLastUsername();
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        return $this->render('auth/login.html.twig', [
+            'last_username' => $email,
+            'error' => $error
+        ]);
+    }
 }

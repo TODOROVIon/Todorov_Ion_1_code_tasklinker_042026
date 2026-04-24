@@ -8,12 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé.')]
 
-class Users implements PasswordAuthenticatedUserInterface
+class Users implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -110,6 +110,11 @@ class Users implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -133,6 +138,26 @@ class Users implements PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getRoles(): array
+    {
+        $roles = [];
+
+        if ($this->access_level === 'Admin') {
+            $roles[] = 'ROLE_ADMIN';
+        } elseif ($this->access_level === 'Chef de projet') {
+            $roles[] = 'ROLE_CHEF_PROJET';
+        } else {
+            $roles[] = 'ROLE_DEVELOPPEUR';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function eraseCredentials(): void
+{
+        $this->password = null;
+}
 
     public function getContractType(): ?string
     {
