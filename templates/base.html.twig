@@ -55,7 +55,24 @@
 
             <main>
             {% block main %}
-               
+               <header>
+                  {% block header_content %}
+                     <div id="current-user">
+                        {% if app.user %}
+                           <div class="employee-avatar" title="{{ app.user.firstName }} {{ app.user.lastName }}">
+                              {{ app.user.initials }}
+                           </div>
+                        {% endif %}
+                     </div>
+                     <div id="title-page">
+                        <h1>{% block page_title %}{% endblock %}</h1>
+                     </div>
+                  {% endblock %}
+               </header>
+     <div id="content">
+        {% block content %}
+        {% endblock %}
+     </div>
             {% endblock %}
             </main>
          </div>

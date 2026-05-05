@@ -2,24 +2,16 @@
 
 {% block title %}{{ user.firstName }} {{ user.lastName }}{% endblock %}
 
-{% block main %}
-            <header>
-               <div id="current-user"></div>
-               <div id="title-page">
-                  <h1>{{ user.firstName }} {{ user.lastName }}</h1>
-               </div>
-            </header>
-            <div id="content">
-               {{ form_start(form) }}
-                  {{ form_row(form.last_name) }}
-                  {{ form_row(form.first__name) }}
-                  {{ form_row(form.email) }}
-                  <div class="form-flex">
-                        {{ form_row(form.enter_date) }}
-                        {{ form_row(form.contract_type) }}
-                  </div>
-                  {{ form_row(form.access_level) }}
-                  <button class="button button-submit">Enregistrer</button>
-               {{ form_end(form) }}
-             </div>
-{% endblock %}
+{% block content %}
+     {{ form_start(form) }}
+        {{ form_row(form.last_name) }}
+        {{ form_row(form.first__name) }}
+        {{ form_row(form.email) }}
+        <div class="form-flex">
+              {{ form_row(form.enter_date) }}
+              {{ form_row(form.contract_type) }}
+        </div>
+        {{ form_row(form.access_level) }}
+        <button class="button button-submit">Enregistrer</button>
+     {{ form_end(form) }}
+  {% endblock %}
