@@ -32,6 +32,10 @@ final class ProjetController extends AbstractController
     {
         $project = $projectRepository->myFind($id);
 
+        if (!$project->getUsers()->contains($this->getUser())) {
+            throw $this->createAccessDeniedException('Acces refusé');
+        }
+
         $taches = $tacheRepository->findByProjectWithRelations($project);
         $statuses = $statusRepository->findAll();
         $tag = $tagRepository->findAll();
