@@ -6,9 +6,11 @@
         <header>
                <div id="current-user">
                   {% if app.user %}
-                     <div class="employee-avatar" title="{{ app.user.firstName }} {{ app.user.lastName }}">
-                        {{ app.user.initials }}
-                     </div>
+                     <a href="{{ path('app_deconnexion') }}">
+                        <div class="employee-avatar">
+                           {{ app.user.initials }}
+                        </div>
+                     </a>
                   {% endif %}
                </div>
                <div id="title-page">
