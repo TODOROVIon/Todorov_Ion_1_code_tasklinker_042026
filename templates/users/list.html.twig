@@ -31,21 +31,23 @@
                         <td>{{ user.contractType }}</td>
                         <td>{{ user.accessLevel }}</td>
                         <td>
-                        {% if is_granted('ROLE_ADMIN') %}
-                           <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
-                              Éditer
-                           </a>
-                           <a class="delete-team" href="{{ path('app_users_delete', {'id': user.id}) }}">
-                              Supprimer
-                           </a>
-                        {% elseif is_granted('ROLE_CHEF_PROJET') and user.accessLevel != 'Admin' %}
-                           <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
-                              Éditer
-                           </a>
-                           <a class="delete-team" href="{{ path('app_users_delete', {'id': user.id}) }}">
-                              Supprimer
-                           </a>
-                        {% endif %}
+                           <div class="td-actions">
+                              {% if is_granted('ROLE_ADMIN') %}
+                                 <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
+                                    Éditer
+                                 </a>
+                                 <a class="delete-team" href="{{ path('app_users_delete', {'id': user.id}) }}">
+                                    Supprimer
+                                 </a>
+                              {% elseif is_granted('ROLE_CHEF_PROJET') and user.accessLevel != 'Admin' %}
+                                 <a class="button button-edit-team" href="{{ path('app_users_show', {'id': user.id}) }}">
+                                    Éditer
+                                 </a>
+                                 <a class="delete-team" href="{{ path('app_users_delete', {'id': user.id}) }}">
+                                    Supprimer
+                                 </a>
+                              {% endif %}
+                           </div>
                         </td>
                      </tr>
                      {% endfor %}              

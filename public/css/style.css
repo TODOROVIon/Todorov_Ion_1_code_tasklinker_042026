@@ -20,6 +20,11 @@ div#main-container {
     min-height: 100vh;
 }
 
+.td-actions {
+    display: flex;
+    gap:5px;
+}
+
 nav {
     width: 300px;
     flex-grow: 0;
@@ -378,7 +383,6 @@ table#team-container tr td {
 }
 
 table#team-container tbody tr td:last-child {
-    display: flex;
     align-items: center;
     gap: 35px;
     max-width: 315px;
@@ -396,6 +400,7 @@ a.delete-team {
     color: #E14343;
     font-size: 14px;
     font-weight: 600;
+    align-self: center;
 }
 
 table#team-container thead tr th:last-child {

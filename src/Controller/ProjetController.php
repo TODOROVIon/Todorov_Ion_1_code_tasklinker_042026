@@ -32,7 +32,7 @@ final class ProjetController extends AbstractController
     {
         $project = $projectRepository->myFind($id);
 
-        if (!$project->getUsers()->contains($this->getUser())) {
+        if (!$this->isGranted('ROLE_ADMIN') && !$project->getUsers()->contains($this->getUser())) {
             throw $this->createAccessDeniedException('Acces refusé');
         }
 
